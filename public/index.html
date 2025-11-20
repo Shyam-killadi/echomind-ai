@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>EchoMind AI Dashboard</title>
+    <style>
+        body { font-family: Arial; margin: 0; padding: 20px; background: #f5f5f5; }
+        .dashboard { max-width: 1200px; margin: 0 auto; }
+        .card { background: white; padding: 20px; margin: 10px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .memory-item { border-left: 4px solid #4CAF50; padding: 10px; margin: 5px 0; background: #f9f9f9; }
+        .emotion-happy { color: #4CAF50; }
+        .emotion-sad { color: #2196F3; }
+        .emotion-angry { color: #f44336; }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <h1>EchoMind AI Dashboard</h1>
+        
+        <div class="grid">
+            <div class="card">
+                <h3>Memory System</h3>
+                <div id="memoriesList"></div>
+                <input type="text" id="memoryInput" placeholder="Add new memory...">
+                <button onclick="addMemory()">Save Memory</button>
+            </div>
+            
+            <div class="card">
+                <h3>Emotion Analysis</h3>
+                <textarea id="emotionText" placeholder="How are you feeling?" rows="4"></textarea>
+                <button onclick="analyzeEmotion()">Analyze Emotion</button>
+                <div id="emotionResult"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Voice Interface</h3>
+            <button onclick="textToSpeech()">Text to Speech</button>
+            <div id="voiceResult"></div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+﻿{
+  "name": "echomind-ai",
+  "version": "1.0.0",
+  "description": "AI-powered emotional companion",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "openai": "^4.20.1",
+    "multer": "^1.4.5-lts.1",
+    "uuid": "^9.0.0",
+    "mongoose": "^8.0.0",
+    "bcryptjs": "^2.4.3",
+    "mongodb": "^6.0.0",
+    "dotenv": "^16.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": ["ai", "mental-health", "emotional-companion"],
+  "author": "EchoMind Team",
+  "license": "MIT"
+}
