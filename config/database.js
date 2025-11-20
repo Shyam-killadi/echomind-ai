@@ -1,10 +1,10 @@
-﻿// Reliable in-memory database for now
+﻿// Simple in-memory database for now
 let users = [];
 let memories = [];
 
 const connectDB = async () => {
-    console.log('✅ EchoMind AI using fast in-memory database');
-    console.log('All features working - MongoDB optional for now');
+    console.log('✅ EchoMind AI database ready');
+    console.log('📁 Using in-memory storage (MongoDB optional)');
 };
 
 const getDB = () => ({
@@ -21,12 +21,8 @@ const getDB = () => ({
                 return { insertedId: newDoc._id };
             },
             find: async (query) => {
-                if (name === 'memories') {
-                    return { 
-                        sort: () => ({
-                            limit: () => memories.filter(m => m.userId === query.userId)
-                        })
-                    };
+                if (name === 'memories' && query.userId) {
+                    return memories.filter(m => m.userId === query.userId);
                 }
                 return [];
             }
