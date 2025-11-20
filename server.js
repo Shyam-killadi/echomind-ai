@@ -1,10 +1,12 @@
 ﻿const express = require('express');
 const path = require('path');
-require('dotenv').config(); // Add this line to load .env file
+require('dotenv').config();
 const { connectDB } = require('./config/database');
 const config = require('./config/config');
 const app = express();
-const PORT = config.port;
+
+// Use Render's port or default to 3000
+const PORT = process.env.PORT || 3000;
 
 // Connect to database
 connectDB();
@@ -31,6 +33,11 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.listen(PORT, () => {
+// Health check endpoint for Render
+app.get('/health', (req, res) => {
+  res.json({ status: 'OK', timestamp: new Date().toISOString() });
+});
+
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 EchoMind AI running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
 });
