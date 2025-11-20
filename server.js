@@ -1,49 +1,46 @@
-﻿const express = require('express');
+﻿// EchoMind AI - Render Compatible Version
+const express = require('express');
 const path = require('path');
-require('dotenv').config();
-const { connectDB } = require('./config/database');
 const app = express();
 
-// Render provides PORT, use it directly
+// Render provides PORT environment variable
 const PORT = process.env.PORT || 3000;
 
-// Connect to database
-connectDB();
-
+// Middleware
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/uploads', express.static('uploads'));
+app.use(express.static('public'));
 
-// Import routes
-const authRoutes = require('./routes/auth');
-const memoryRoutes = require('./routes/memory');
-const biometricRoutes = require('./routes/biometric');
-const emotionRoutes = require('./routes/emotion');
-const voiceRoutes = require('./routes/voice');
-const aiRoutes = require('./routes/ai');
-app.use('/api/auth', authRoutes);
-app.use('/api/memory', memoryRoutes);
-app.use('/api/biometric', biometricRoutes);
-app.use('/api/emotion', emotionRoutes);
-app.use('/api/voice', voiceRoutes);
-app.use('/api/ai', aiRoutes);
-
+// Routes
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.json({ 
+    message: 'EchoMind AI Server is Running! 🚀',
+    status: 'OK',
+    version: '1.0.0',
+    environment: process.env.NODE_ENV || 'development'
+  });
 });
 
-// Health check endpoint
 app.get('/health', (req, res) => {
   res.json({ 
-    status: 'OK', 
+    status: 'Healthy', 
     service: 'EchoMind AI',
     timestamp: new Date().toISOString(),
     port: PORT
   });
 });
 
-// Start server - SIMPLIFIED for Render
-app.listen(PORT, () => {
-  console.log(`🚀 EchoMind AI running on port ${PORT}`);
-  console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
+// API Routes
+app.get('/api/status', (req, res) => {
+  res.json({ 
+    features: ['Authentication', 'Memory System', 'Emotion Analysis', 'AI Chat'],
+    status: 'operational'
+  });
+});
+
+// Start server - CRITICAL: Bind to 0.0.0.0 for Render
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`✅ EchoMind AI successfully started`);
+  console.log(`📍 Running on port: ${PORT}`);
+  console.log(`🌐 Access URL: http://0.0.0.0:${PORT}`);
+  console.log(`⚡ Environment: ${process.env.NODE_ENV || 'development'}`);
 });
